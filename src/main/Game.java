@@ -1,5 +1,8 @@
 package main;
-
+/**
+ * 
+ * @author kaitlyn
+ */
 public class Game {
     
     private static Player[] players;
@@ -7,7 +10,11 @@ public class Game {
     private static int step = 0;
 
     private Board board;
-    
+    /**
+     * class for the game object
+     * @param playerNames array of player names
+     * @throws Exception input validation
+     */
     public Game(String[] playerNames) throws Exception {
         
         if(playerNames == null || playerNames.length == 0 ) {
@@ -26,7 +33,9 @@ public class Game {
 
         board = new Board(WindowSettings.BOARD_X, WindowSettings.BOARD_Y);
     }
-    
+    /**
+     * method to play the game
+     */
     public void PlayGame() {
         GameWindow window = new GameWindow(board, players);
         window.setVisible(true);

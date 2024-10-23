@@ -1,17 +1,28 @@
 package main;
-
+/**
+ * this is a class for the board object.
+ * @author kaitlyn
+ */
 public class Board {
     // Constants
     private final Square[] SQUARES = new Square[100];
     // Instance Variables
     private int x;
     private int y;
-    // Constructor
+    // Constructor 
+    /**
+     * this is a constructor for the board object
+     * @param xPos this is the x position
+     * @param yPos this is the y position
+     * 
+     */
     public Board(int xPos, int yPos) {
         x = xPos;
         y = yPos;
+        
         int row = 9;
         int col = 0;
+       
         for(int i = 0; i < 100; i++) {
             SQUARES[i] = new Square(i+1, row, col);
             if ((i+1) % 10 == 0) {
@@ -23,17 +34,34 @@ public class Board {
                 }
                 else {
                     col -= 1;
+                    //* 
                 }
             }
         }
         addLadders();
         addChutes();
+      
+   
     }
-
+/**
+ * 
+ * @return x position of the board
+ * 
+ */
     public int getX() {return x;}
+    /**
+     * 
+     * @return y position of the board
+     */
     public int getY() {return y;}
+    /**
+     * 
+     * @param squareID int the ID of the square
+     * @return the square object that has the ID
+     */
     public Square getSquare(int squareID) {
         return SQUARES[squareID - 1];
+        
     }
 
     private final void addLadders() {
