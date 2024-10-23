@@ -4,7 +4,10 @@ import java.awt.Rectangle;
 import java.awt.geom.Ellipse2D;
 import java.awt.geom.Point2D;
 import java.util.Random;
-
+/**
+ * 
+ * @author kaitlyn
+ */
 public class Dice {
     // Instance Variables
     private Random random;
@@ -13,6 +16,11 @@ public class Dice {
     private int side;
 
     // Constructors
+    /**
+     * constructor of the dice
+     * @param xPos position of x of the dice
+     * @param yPos position of y of the dice
+     */
     public Dice(int xPos, int yPos) {
         random = new Random();
         x = xPos;
@@ -22,15 +30,35 @@ public class Dice {
 
     // Methods
     // Accessors
+    /**
+     * getter for x
+     * @return x
+     */
     public int getX() {return x;}
+    /**
+     * getter for y
+     * @return y
+     */
     public int getY() {return y;}
+    /**
+     * getter for the side of the dice
+     * @return the side of the dice
+     */
     public int getSide() {return side;}
 
     // Mutators
+    /**
+     * setter for the position dice
+     * @param x x position
+     * @param y y position
+     */
     public void setPosition(int x, int y) {
         this.x = x;
         this.y = y;
     }
+    /**
+     * rolls the dice
+     */
     public void roll() {
         side = random.nextInt(1, 7);
     }
@@ -41,7 +69,7 @@ public class Dice {
         double size;
         Point2D center;
 
-        // Constructor
+       
         public Dot(double size) {
             this.size = size;
             center = new Point2D.Double();
@@ -60,8 +88,13 @@ public class Dice {
         }
 
         // Mutators
+        
         public void setCenter(Point2D newCenter) {center = newCenter;}
     }
+    /**
+     * draws the dice
+     * @param g2 graphics object
+     */
     public void draw(Graphics2D g2) {
         final int DIE_SIZE = 100;       // Should be multiple of 20 for int division
         final int DOT_SIZE = DIE_SIZE/5;

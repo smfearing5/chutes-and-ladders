@@ -1,9 +1,16 @@
 package main;
 
 import java.util.Scanner;
-
+/**
+ * 
+ * @author kaitlyn
+ */
 public class Main {
-
+/**
+ * main method to run the program
+ * @param args optional arguments
+ * @throws Exception input validation
+ */
     public static void main(String[] args) throws Exception {
         
         Scanner in = new Scanner(System.in);

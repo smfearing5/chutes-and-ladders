@@ -1,21 +1,34 @@
+
 package main;
 
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import javax.swing.JComponent;
-
+/**
+ * 
+ * @author kaitlyn
+ */
 public class BoardComponent extends JComponent {
     // Instance Variables
     Board board;
     Player[] players;
     
     // Constructor
+    /**
+     * board object for painting the board to the window.
+     * @param board object
+     * @param players array of player objects.
+     */
     public BoardComponent(Board board, Player[] players) {
         this.board = board;
         this.players = players;
     }
 
     // Methods
+    /**
+     * paint component draws the board to the window. 
+     * @param g graphics object the default pint component can use.
+     */
     public void paintComponent(Graphics g) {
         Graphics2D g2 = (Graphics2D) g;
 
