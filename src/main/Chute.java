@@ -1,6 +1,5 @@
 package main;
 
-import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.geom.Line2D;
 import java.awt.geom.Point2D;
@@ -12,6 +11,9 @@ public class Chute {
     
     private int start;
     private int end;
+    private Line2D line1;
+    private Line2D line2;
+
     /**
      * chute constructor
      * @param pos1 ID of pos 1
@@ -54,6 +56,22 @@ public class Chute {
     public int slide(int from) {
         return this.end;
     }
+
+    public void buildImage(Square startSquare, Square endSquare) {
+        Point2D anchor1 = startSquare.getAnchor(endSquare.getCenter());
+        Point2D anchor2 = endSquare.getAnchor(startSquare.getCenter());
+        Vector vector = new Vector(anchor1, endSquare.getCenter());
+        vector.setMagnitude(WindowSettings.CONNECTOR_WIDTH/2.0);
+        Vector[] orthogonal = vector.orthogonal();
+
+        Point2D p1 = orthogonal[0].getPointFrom(anchor1);
+        Point2D p2 = orthogonal[0].getPointFrom(anchor2);
+        this.line1 = new Line2D.Double(p1, p2);
+
+        Point2D p3 = orthogonal[1].getPointFrom(anchor1);
+        Point2D p4 = orthogonal[1].getPointFrom(anchor2);
+        this.line2 = new Line2D.Double(p3, p4);
+    }
   
     /**
      * draws the chute
@@ -62,11 +80,8 @@ public class Chute {
      * @param g2 
      */
     public void draw(Square startSquare, Square endSquare, Graphics2D g2) {
-        Point2D p1 = startSquare.getCenter();
-        Point2D p2 = endSquare.getCenter();
-        Line2D line = new Line2D.Double(p1, p2);
-
-        g2.setColor(Color.blue);
-        g2.draw(line);
+        g2.setColor(WindowSettings.CHUTE_COLOR);
+        g2.draw(line1);
+        g2.draw(line2);
     }
 }

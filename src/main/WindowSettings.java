@@ -1,13 +1,15 @@
 package main;
 
 import java.awt.Color;
-import java.awt.geom.Point2D;
+// import java.awt.geom.Point2D;
 /**
  * 
  * @author kaitlyn
  */
 public class WindowSettings {
+
     // Board constants
+
     /**
      * board x position
      */
@@ -20,8 +22,19 @@ public class WindowSettings {
      * the square size
      */
     public final static int SQUARE_SIZE = 60;
+    public final static int CONNECTOR_WIDTH = SQUARE_SIZE/5;
+    public final static int[][] CHUTE_LOCATIONS = {
+        {98, 78}, {95, 75}, {93, 73}, {87, 24}, {64, 60},
+        {62, 19}, {56, 53}, {49, 11}, {47, 26}, {16,  6}
+    };
+    public final static int[][] LADDER_LOCATIONS = {
+        { 1, 38}, { 4, 14}, { 9,  31},
+        {21, 42}, {28, 84}, {36,  43},
+        {51, 68}, {71, 91}, {80, 100}
+    };
 
     // Player constants
+
     /**
      * radius of the circle when the player is drawn
      */
@@ -35,19 +48,16 @@ public class WindowSettings {
         Color.blue,
         Color.green
     };
-    /**
-     * player start positions
-     */
-    public final static Point2D[] PLAYER_START = {
-        new Point2D.Double(BOARD_X - SQUARE_SIZE * 2 / 3.0, BOARD_Y + SQUARE_SIZE * 29/3.0),
-        new Point2D.Double(BOARD_X - SQUARE_SIZE / 3.0, BOARD_Y + SQUARE_SIZE * 28/3.0),
-        new Point2D.Double(BOARD_X - SQUARE_SIZE / 3.0, BOARD_Y + SQUARE_SIZE * 29/3.0),
-        new Point2D.Double(BOARD_X - SQUARE_SIZE * 2 / 3.0, BOARD_Y + SQUARE_SIZE * 28/3.0)
-    };
+
+    // Other Colors
+
+    public final static Color CHUTE_COLOR = new Color(20, 30, 255);
+    public final static Color LADDER_COLOR = new Color(165, 42, 42);
 
     // Timer constants
+
     /**
      * amount of time between each step
      */
-    public final static int PLAYER_STEP_DELAY = 200;    // ms
+    public final static int PLAYER_STEP_DELAY = 400;    // ms
 }

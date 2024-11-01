@@ -15,9 +15,7 @@ public class Player {
     private Color color;
     private Point2D location;
     
-    // public Player() {
-    //     this.position = 0;
-    // }
+
     /**
      * constructor for the player object
      * @param playerID ID number
@@ -28,7 +26,7 @@ public class Player {
         this.name = name;
         this.position = 0;
         this.color = WindowSettings.PLAYER_COLORS[playerID % 4];
-        this.location = WindowSettings.PLAYER_START[playerID % 4];
+        this.location = new Point2D.Double();
     }
 /**
  * getter for the ID
@@ -72,14 +70,13 @@ public class Player {
 
         return corner;
     }
-/**
- * movement of the player to the target square
- * @param square target square
- */
-    public void moveToSquare(Square square) {
-        setPosition(square.getId());
-        this.location = square.getCenter();
+    public void setLocation(int x, int y) {
+        location = new Point2D.Double(x, y);
     }
+    public void setLocation(Point2D newLocation) {
+        location = newLocation;
+    }
+
 /**
  * draws the player
  * @param g2 graphics object

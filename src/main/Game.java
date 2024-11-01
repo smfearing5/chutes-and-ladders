@@ -4,77 +4,80 @@ package main;
  * @author kaitlyn
  */
 public class Game {
-    
-    private static Player[] players;
-    private static int numOfPlayers;
-    private static int step = 0;
+
+    // Instance Variables
 
     private Board board;
-    /**
-     * class for the game object
-     * @param playerNames array of player names
-     * @throws Exception input validation
-     */
-    public Game(String[] playerNames) throws Exception {
-        
-        if(playerNames == null || playerNames.length == 0 ) {
-            throw new Exception("no players, try again");
-        }
-        
-        numOfPlayers = playerNames.length;
-        if(numOfPlayers > 4 || numOfPlayers < 2) {
-            throw new Exception("not correct amount of players");
-        }
-        
-        players = new Player[numOfPlayers];
-        for(int i = 0; i < numOfPlayers; i++) {
-            players[i] = new Player(i+1, playerNames[i]);
-        }
+    private Player[] players;
+    private GameWindow window;
 
-        board = new Board(WindowSettings.BOARD_X, WindowSettings.BOARD_Y);
-    }
-    /**
-     * method to play the game
-     */
-    public void PlayGame() {
-        GameWindow window = new GameWindow(board, players);
-        window.setVisible(true);
+    // Private Methods
 
-        boolean hasWinner = false;
-        
-        while(!hasWinner) {
-            
-            for(Player player : players) {
-                step++;
-                int currentPosition = player.getPosition();
-                int diceNum = Dice.roll();
-                int newPosition = currentPosition + diceNum;
-                System.out.print(step + ": " + player.getName() + ": " + currentPosition + "---> " + newPosition);
-                
-                if(newPosition <= 100) {
-                    window.playerWalk(player, board, newPosition);
-                    if(board.getSquare(newPosition).getChute() != null) {
-                        newPosition = processChute(newPosition);
-                        window.playerStep(player, board, newPosition);
-                    }
-                
-                    if(board.getSquare(newPosition).getLadder() != null) {
-                        newPosition = processLadder(newPosition);
-                        window.playerStep(player, board, newPosition);
-                    }
-                    System.out.println();
-                    hasWinner = checkForWinner(player);
-                    if (hasWinner) break;
-                }
-                else {
-                    System.out.println(", Score over 100, try again");
-                }
-                // else if (newPosition == 100) {
-                //     System.out.println("\nThe Winner is " + player.getName());
-                //     hasWinner = true;
-                //     break;
-                // }             
+    private void playerSpread(int squareID) {
+        // Check for players on the same square
+        Square square = board.getSquare(squareID);
+        Player singlePlayer = new Player(0, null);
+        int numOfPlayers = 0;
+        for (Player player : players) {
+            if (player.getPosition() == squareID) {
+                numOfPlayers++;
+                singlePlayer = player;
             }
+        }
+        // Single player just goes to center of square
+        if (numOfPlayers == 1) singlePlayer.setLocation(square.getCenter());
+        else if (numOfPlayers >= 2) {
+            // Spread the players
+            int x1 = square.getX() + WindowSettings.SQUARE_SIZE/3;
+            int x2 = square.getX() + WindowSettings.SQUARE_SIZE*2/3;
+            int y1 = square.getY() + WindowSettings.SQUARE_SIZE/3;
+            int y2 = square.getY() + WindowSettings.SQUARE_SIZE*2/3;
+
+            Player[] samePos = new Player[numOfPlayers];
+            int playerIndex = 0;
+            for (Player player : players) {
+                if (player.getPosition() == squareID) {
+                    samePos[playerIndex] = player;
+                    playerIndex++;
+                }
+            }
+            switch (numOfPlayers) {
+                case 2:
+                    int centerY = (int) square.getCenter().getY();
+                    samePos[0].setLocation(x1, centerY);
+                    samePos[1].setLocation(x2, centerY);
+                    break;
+                case 4:
+                    samePos[3].setLocation(x2, y2);
+                case 3:
+                    samePos[0].setLocation(x1, y1);
+                    samePos[1].setLocation(x2, y1);
+                    samePos[2].setLocation(x1, y2);
+                    break;
+            }
+        }
+    }
+
+    private void playerStep(Player player, int newPos) {
+        int startPos = player.getPosition();
+        // player.moveToSquare(board.getSquare(newPos));
+        player.setPosition(newPos);
+        playerSpread(startPos);
+        playerSpread(newPos);
+        window.updateBoard();
+        try {
+            Thread.sleep(WindowSettings.PLAYER_STEP_DELAY);
+        }
+        catch (InterruptedException e) {
+            Thread.currentThread().interrupt();;
+        }
+    }
+
+    private void playerWalk(Player player, int newPos) {
+        int currentSquareID = player.getPosition();
+        while (player.getPosition() != newPos) {
+            currentSquareID++;
+            playerStep(player, currentSquareID);
         }
     }
     
@@ -100,5 +103,81 @@ public class Game {
             return true;
         }
         return false;
+    }
+
+    /* Public Interface */
+
+    // Constructor
+
+    /**
+     * class for the game object
+     * @param playerNames array of player names
+     * @throws Exception input validation
+     */
+    public Game(String[] playerNames) throws Exception {
+        int numOfPlayers;
+        
+        if(playerNames == null || playerNames.length == 0 ) {
+            throw new Exception("no players, try again");
+        }
+        
+        numOfPlayers = playerNames.length;
+        if(numOfPlayers > 4 || numOfPlayers < 2) {
+            throw new Exception("not correct amount of players");
+        }
+        
+        players = new Player[numOfPlayers];
+        for(int i = 0; i < numOfPlayers; i++) {
+            players[i] = new Player(i+1, playerNames[i]);
+        }
+
+        board = new Board(WindowSettings.BOARD_X, WindowSettings.BOARD_Y);
+        window = new GameWindow(board, players);
+        playerSpread(0);
+    }
+
+    // Methods
+
+    /**
+     * Method to play the game
+     */
+    public void PlayGame() {
+        window.setVisible(true);
+
+        boolean hasWinner = false;
+        int step = 0;
+        
+        // Main Game loop
+        while(!hasWinner) {
+            // For each Player...
+            for(Player player : players) {
+                // Player takes a turn
+                step++;
+                int currentPosition = player.getPosition();
+                int diceNum = Dice.roll();
+                int newPosition = currentPosition + diceNum;
+                System.out.print(step + ": " + player.getName() + ": " + currentPosition + "---> " + newPosition);
+                
+                if(newPosition <= 100) {
+                    playerWalk(player, newPosition);
+
+                    if(board.getSquare(newPosition).getChute() != null) {
+                        newPosition = processChute(newPosition);
+                        playerStep(player, newPosition);
+                    }
+                
+                    if(board.getSquare(newPosition).getLadder() != null) {
+                        newPosition = processLadder(newPosition);
+                        playerStep(player, newPosition);
+                    }
+                    System.out.println();
+                    hasWinner = checkForWinner(player);
+                    if (hasWinner) break;
+                }
+                else {
+                    System.out.println(", Score over 100, try again");
+                }         
+            }
+        }
     }
 }

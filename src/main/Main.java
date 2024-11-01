@@ -2,13 +2,15 @@ package main;
 
 import java.util.Scanner;
 /**
- * 
- * @author kaitlyn
+ * @author Issac Blackwell
+ * @author Steven Fearing
+ * @author Jacob Plascencia
+ * @author Kaitlyn Pragnell
  */
 public class Main {
 /**
  * main method to run the program
- * @param args optional arguments
+ * @param args Optional arguments (not used)
  * @throws Exception input validation
  */
     public static void main(String[] args) throws Exception {
@@ -16,13 +18,13 @@ public class Main {
         Scanner in = new Scanner(System.in);
         
         System.out.println("Enter Number of Players: ");
-        int people = in.nextInt();   
+        int numPlayers = in.nextInt();   
         in.nextLine();
         
-        String[] players = new String[people];
+        String[] players = new String[numPlayers];
         
        
-        for(int i = 0; i < people; i++) {
+        for(int i = 0; i < numPlayers; i++) {
             System.out.println("Player " + (i+1) + ": ");
             players[i] = in.nextLine();
         }

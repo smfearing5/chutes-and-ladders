@@ -33,13 +33,13 @@ public class BoardComponent extends JComponent {
         Graphics2D g2 = (Graphics2D) g;
 
         // Draw squares
-        for (int i=1; i <= 100; i++) {
+        for (int i = 1; i <= 100; i++) {
             board.getSquare(i).draw(g2);
         }
 
         // Draw Chutes
         Chute chute;
-        for (int i=1; i <= 100; i++) {
+        for (int i = 1; i <= 100; i++) {
             chute = board.getSquare(i).getChute();
             if (chute != null) {
                 chute.draw(
@@ -51,7 +51,7 @@ public class BoardComponent extends JComponent {
         }
         // Draw Ladders
         Ladder ladder;
-        for (int i=1; i <= 100; i++) {
+        for (int i = 1; i <= 100; i++) {
             ladder = board.getSquare(i).getLadder();
             if (ladder != null) {
                 ladder.draw(
