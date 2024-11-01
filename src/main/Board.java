@@ -24,7 +24,7 @@ public class Board {
         Square startSquare;
         Square endSquare;
         Chute chute;
-        for (int[] positions : WindowSettings.CHUTE_LOCATIONS) {
+        for (int[] positions : Settings.CHUTE_LOCATIONS) {
             startSquare = SQUARES[positions[0]];
             endSquare = SQUARES[positions[1]];
             chute = new Chute(positions[0], positions[1]);
@@ -38,7 +38,7 @@ public class Board {
         Square startSquare;
         Square endSquare;
         Ladder ladder;
-        for (int[] positions : WindowSettings.LADDER_LOCATIONS) {
+        for (int[] positions : Settings.LADDER_LOCATIONS) {
             startSquare = SQUARES[positions[0]];
             endSquare = SQUARES[positions[1]];
             ladder = new Ladder(positions[0], positions[1]);
@@ -49,11 +49,11 @@ public class Board {
     }
 
     private final int squareX(int col) {
-        return x + (col * WindowSettings.SQUARE_SIZE);
+        return x + (col * Settings.SQUARE_SIZE);
     }
 
     private final int squareY(int row) {
-        return y + (row * WindowSettings.SQUARE_SIZE);
+        return y + (row * Settings.SQUARE_SIZE);
     }
 
     /* Public Interface */

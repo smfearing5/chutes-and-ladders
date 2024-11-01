@@ -61,7 +61,7 @@ public class Ladder {
         Point2D anchor1 = startSquare.getAnchor(endSquare.getCenter());
         Point2D anchor2 = endSquare.getAnchor(startSquare.getCenter());
         Vector vector = new Vector(anchor1, endSquare.getCenter());
-        vector.setMagnitude(WindowSettings.CONNECTOR_WIDTH/2.0);
+        vector.setMagnitude(Settings.CONNECTOR_WIDTH/2.0);
         Vector[] orthogonal = vector.orthogonal();
 
         Point2D p1 = orthogonal[0].getPointFrom(anchor1);
@@ -73,7 +73,7 @@ public class Ladder {
         this.line2 = new Line2D.Double(p3, p4);
 
         vector = new Vector(p1, p2);
-        int numRungs = (int) vector.getMagnitude() / WindowSettings.CONNECTOR_WIDTH;
+        int numRungs = (int) vector.getMagnitude() / Settings.CONNECTOR_WIDTH;
         vector.setMagnitude(vector.getMagnitude() / numRungs);
         numRungs--;
 
@@ -98,7 +98,7 @@ public class Ladder {
      * @param g2 graphics object
      */
     public void draw(Square startSquare, Square endSquare, Graphics2D g2) {
-        g2.setColor(WindowSettings.LADDER_COLOR);
+        g2.setColor(Settings.LADDER_COLOR);
         g2.draw(line1);
         g2.draw(line2);
         for (Line2D rung : rungs) {

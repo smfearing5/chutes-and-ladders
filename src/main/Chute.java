@@ -61,7 +61,7 @@ public class Chute {
         Point2D anchor1 = startSquare.getAnchor(endSquare.getCenter());
         Point2D anchor2 = endSquare.getAnchor(startSquare.getCenter());
         Vector vector = new Vector(anchor1, endSquare.getCenter());
-        vector.setMagnitude(WindowSettings.CONNECTOR_WIDTH/2.0);
+        vector.setMagnitude(Settings.CONNECTOR_WIDTH/2.0);
         Vector[] orthogonal = vector.orthogonal();
 
         Point2D p1 = orthogonal[0].getPointFrom(anchor1);
@@ -80,7 +80,7 @@ public class Chute {
      * @param g2 
      */
     public void draw(Square startSquare, Square endSquare, Graphics2D g2) {
-        g2.setColor(WindowSettings.CHUTE_COLOR);
+        g2.setColor(Settings.CHUTE_COLOR);
         g2.draw(line1);
         g2.draw(line2);
     }

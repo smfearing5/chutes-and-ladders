@@ -3,8 +3,6 @@ package main;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
-import java.awt.geom.Ellipse2D;
-import java.awt.geom.Line2D;
 import java.awt.geom.Point2D;
 
 /**
@@ -67,8 +65,8 @@ public class Square {
      * @return Point2D at center of Square
      */
     public Point2D getCenter() {
-        int centerX = x + WindowSettings.SQUARE_SIZE/2;
-        int centerY = y + WindowSettings.SQUARE_SIZE/2;
+        int centerX = x + Settings.SQUARE_SIZE/2;
+        int centerY = y + Settings.SQUARE_SIZE/2;
 
         return new Point2D.Double(centerX, centerY);
     }
@@ -89,7 +87,7 @@ public class Square {
 
     // placeholder, WIP
     public Point2D getAnchor(Point2D otherSquareCenter) {
-        double radius = WindowSettings.SQUARE_SIZE/4;
+        double radius = Settings.SQUARE_SIZE/4;
         Point2D thisCenter = getCenter();
         Vector vector = new Vector(thisCenter, otherSquareCenter);
         vector.setMagnitude(radius);
@@ -143,8 +141,8 @@ public class Square {
         // Draw the Square
         Rectangle rectangle = new Rectangle(
             x, y,                           // x position, y position
-            WindowSettings.SQUARE_SIZE,     // width
-            WindowSettings.SQUARE_SIZE      // height
+            Settings.SQUARE_SIZE,     // width
+            Settings.SQUARE_SIZE      // height
         );
         if (id % 2 == 0) {
             g2.setColor(Color.YELLOW);
@@ -160,7 +158,7 @@ public class Square {
         g2.drawString(
             numString, 
             x + 5, 
-            y + WindowSettings.SQUARE_SIZE/4
+            y + Settings.SQUARE_SIZE/4
         );
     }
 }

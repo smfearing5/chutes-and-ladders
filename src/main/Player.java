@@ -25,7 +25,7 @@ public class Player {
         this.id = playerID;
         this.name = name;
         this.position = 0;
-        this.color = WindowSettings.PLAYER_COLORS[playerID % 4];
+        this.color = Settings.PLAYER_COLORS[playerID % 4];
         this.location = new Point2D.Double();
     }
 /**
@@ -64,8 +64,8 @@ public class Player {
 
     private Point2D getCorner() {
         Point2D corner = new Point2D.Double(
-            location.getX() + WindowSettings.PLAYER_RADIUS,
-            location.getY() + WindowSettings.PLAYER_RADIUS
+            location.getX() + Settings.PLAYER_RADIUS,
+            location.getY() + Settings.PLAYER_RADIUS
         );
 
         return corner;

@@ -28,10 +28,10 @@ public class Game {
         if (numOfPlayers == 1) singlePlayer.setLocation(square.getCenter());
         else if (numOfPlayers >= 2) {
             // Spread the players
-            int x1 = square.getX() + WindowSettings.SQUARE_SIZE/3;
-            int x2 = square.getX() + WindowSettings.SQUARE_SIZE*2/3;
-            int y1 = square.getY() + WindowSettings.SQUARE_SIZE/3;
-            int y2 = square.getY() + WindowSettings.SQUARE_SIZE*2/3;
+            int x1 = square.getX() + Settings.SQUARE_SIZE/3;
+            int x2 = square.getX() + Settings.SQUARE_SIZE*2/3;
+            int y1 = square.getY() + Settings.SQUARE_SIZE/3;
+            int y2 = square.getY() + Settings.SQUARE_SIZE*2/3;
 
             Player[] samePos = new Player[numOfPlayers];
             int playerIndex = 0;
@@ -66,7 +66,7 @@ public class Game {
         playerSpread(newPos);
         window.updateBoard();
         try {
-            Thread.sleep(WindowSettings.PLAYER_STEP_DELAY);
+            Thread.sleep(Settings.PLAYER_STEP_DELAY);
         }
         catch (InterruptedException e) {
             Thread.currentThread().interrupt();;
@@ -131,7 +131,7 @@ public class Game {
             players[i] = new Player(i+1, playerNames[i]);
         }
 
-        board = new Board(WindowSettings.BOARD_X, WindowSettings.BOARD_Y);
+        board = new Board(Settings.BOARD_X, Settings.BOARD_Y);
         window = new GameWindow(board, players);
         playerSpread(0);
     }

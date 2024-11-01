@@ -6,7 +6,7 @@ import java.awt.Color;
  * 
  * @author kaitlyn
  */
-public class WindowSettings {
+public class Settings {
 
     // Board constants
 
