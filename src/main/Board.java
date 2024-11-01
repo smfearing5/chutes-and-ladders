@@ -20,31 +20,24 @@ public class Board {
 
     // Private Methods
     
-    private final void addChutes() {
+    private final void addChutesAndLadders() {
         Square startSquare;
         Square endSquare;
+
         Chute chute;
         for (int[] positions : Settings.CHUTE_LOCATIONS) {
             startSquare = SQUARES[positions[0]];
             endSquare = SQUARES[positions[1]];
-            chute = new Chute(positions[0], positions[1]);
-
+            chute = new Chute(startSquare, endSquare);
             startSquare.setChute(chute);
-            chute.buildImage(startSquare, endSquare);
         }
-    }
 
-    private final void addLadders() {       
-        Square startSquare;
-        Square endSquare;
         Ladder ladder;
         for (int[] positions : Settings.LADDER_LOCATIONS) {
             startSquare = SQUARES[positions[0]];
             endSquare = SQUARES[positions[1]];
-            ladder = new Ladder(positions[0], positions[1]);
-
+            ladder = new Ladder(startSquare, endSquare);
             startSquare.setLadder(ladder);
-            ladder.buildImage(startSquare, endSquare);
         }
     }
 
@@ -89,8 +82,7 @@ public class Board {
                 }
             }
         }
-        addChutes();
-        addLadders();
+        addChutesAndLadders();
     }
 
     // Accessors

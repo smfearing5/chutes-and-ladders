@@ -46,7 +46,7 @@ public class Square {
      * Returns the ID number of the Square
      * @return the ID number
      */
-    public int getId() {return id;}
+    public int getID() {return id;}
 
     /**
      * Returns the x position of the Square
@@ -101,7 +101,7 @@ public class Square {
      * Assigns an ID number to the Square
      * @param id  the ID number
      */
-    public void setId(int id) {this.id = id;}
+    public void setID(int id) {this.id = id;}
 
     /**
      * Sets the x position of the Square

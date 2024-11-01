@@ -1,7 +1,9 @@
 package main;
 
 import java.util.Scanner;
+
 /**
+ * Main class for running the program.
  * @author Issac Blackwell
  * @author Steven Fearing
  * @author Jacob Plascencia
@@ -9,7 +11,7 @@ import java.util.Scanner;
  */
 public class Main {
 /**
- * main method to run the program
+ * Main method to run the program
  * @param args Optional arguments (not used)
  * @throws Exception input validation
  */

@@ -1,7 +1,11 @@
 package main;
+
 /**
- * 
- * @author kaitlyn
+ * This class contains everything needed for a single play session.
+ * @author Issac Blackwell
+ * @author Steven Fearing
+ * @author Jacob Plascencia
+ * @author Kaitlyn Pragnell
  */
 public class Game {
 
@@ -82,19 +86,17 @@ public class Game {
     }
     
     private int processLadder(int newPos) {
-        int topPos = board.getSquare(newPos).getLadder().climb(newPos);
+        int topPos = board.getSquare(newPos).getLadder().getEndSquare().getID();
         System.out.print(" -- Ladder --> " + topPos);
-        newPos = topPos;
 
-        return newPos;
+        return topPos;
     }
     
     private int processChute(int newPos) {
-        int bottomPos = board.getSquare(newPos).getChute().slide(newPos);
+        int bottomPos = board.getSquare(newPos).getChute().getEndSquare().getID();
         System.out.print(" -- Chute --> " + bottomPos);
-        newPos = bottomPos;
 
-        return newPos;
+        return bottomPos;
     }
 
     private boolean checkForWinner(Player player) {
@@ -110,8 +112,8 @@ public class Game {
     // Constructor
 
     /**
-     * class for the game object
-     * @param playerNames array of player names
+     * Constructor for the Game object
+     * @param playerNames Array of player names
      * @throws Exception input validation
      */
     public Game(String[] playerNames) throws Exception {
@@ -139,7 +141,7 @@ public class Game {
     // Methods
 
     /**
-     * Method to play the game
+     * Method used to start the play session
      */
     public void PlayGame() {
         window.setVisible(true);

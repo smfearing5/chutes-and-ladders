@@ -2,16 +2,15 @@ package main;
 
 import java.awt.BorderLayout;
 import javax.swing.JFrame;
-// import javax.swing.JLabel;
+
 /**
- * 
- * @author kaitlyn
+ * This is a class for the GameWindow object.
+ * @author Issac Blackwell
+ * @author Steven Fearing
+ * @author Jacob Plascencia
+ * @author Kaitlyn Pragnell
  */
 public class GameWindow extends JFrame {
-
-    // Constants
-
-    private static final int FRAME_SIZE = 1000;
 
     // Instance Variables
 
@@ -23,12 +22,12 @@ public class GameWindow extends JFrame {
     // Constructor
 
     /**
-     * constructor for the game window object
-     * @param board board object
-     * @param players array of player objects
+     * Constructor for the GameWindow object
+     * @param board The board object used in this Game
+     * @param players Array of player objects
      */
     public GameWindow(Board board, Player[] players) {
-        setSize(FRAME_SIZE, FRAME_SIZE);
+        setSize(Settings.WINDOW_SIZE, Settings.WINDOW_SIZE);
         setTitle("Chutes and Ladders");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -39,5 +38,9 @@ public class GameWindow extends JFrame {
         add(boardImage, BorderLayout.CENTER);
     }
 
+    /**
+     * Method used to update the Board image
+     * This method should be called anytime a player moves
+     */
     public void updateBoard() {boardImage.repaint();}
 }
