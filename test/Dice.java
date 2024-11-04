@@ -10,7 +10,7 @@ import java.util.Random;
  */
 public class Dice {
     // Instance Variables
-    private Random random;
+    private final Random random;
     private int x;
     private int y;
     private int side;

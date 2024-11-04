@@ -1,31 +1,76 @@
 package main;
+
 /**
- * this is a class for the board object.
- * @author kaitlyn
+ * This is a class for the Board object.
+ * @author Issac Blackwell
+ * @author Steven Fearing
+ * @author Jacob Plascencia
+ * @author Kaitlyn Pragnell
  */
 public class Board {
+
     // Constants
-    private final Square[] SQUARES = new Square[100];
+
+    private final Square[] SQUARES = new Square[101];
+
     // Instance Variables
+
     private int x;
     private int y;
-    // Constructor 
+
+    // Private Methods
+    
+    private final void addChutesAndLadders() {
+        Square startSquare;
+        Square endSquare;
+
+        Chute chute;
+        for (int[] positions : Settings.CHUTE_LOCATIONS) {
+            startSquare = SQUARES[positions[0]];
+            endSquare = SQUARES[positions[1]];
+            chute = new Chute(startSquare, endSquare);
+            startSquare.setChute(chute);
+        }
+
+        Ladder ladder;
+        for (int[] positions : Settings.LADDER_LOCATIONS) {
+            startSquare = SQUARES[positions[0]];
+            endSquare = SQUARES[positions[1]];
+            ladder = new Ladder(startSquare, endSquare);
+            startSquare.setLadder(ladder);
+        }
+    }
+
+    private final int squareX(int col) {
+        return x + (col * Settings.SQUARE_SIZE);
+    }
+
+    private final int squareY(int row) {
+        return y + (row * Settings.SQUARE_SIZE);
+    }
+
+    /* Public Interface */
+
+    // Constructor
+
     /**
-     * this is a constructor for the board object
-     * @param xPos this is the x position
-     * @param yPos this is the y position
-     * 
+     * Constructor for the Board object
+     * @param xPos int for x position
+     * @param yPos int for y position
      */
     public Board(int xPos, int yPos) {
-        x = xPos;
-        y = yPos;
+        this.x = xPos;
+        this.y = yPos;
         
+        // Player Start Square
+        SQUARES[0] = new Square(0, squareX(-1), squareY(9));
+
+        // Visible Board Squares
         int row = 9;
         int col = 0;
-       
-        for(int i = 0; i < 100; i++) {
-            SQUARES[i] = new Square(i+1, row, col);
-            if ((i+1) % 10 == 0) {
+        for(int i = 1; i <= 100; i++) {
+            SQUARES[i] = new Square(i, squareX(col), squareY(row));
+            if ((i) % 10 == 0) {
                 row -= 1;
             }
             else {
@@ -34,58 +79,32 @@ public class Board {
                 }
                 else {
                     col -= 1;
-                    //* 
                 }
             }
         }
-        addLadders();
-        addChutes();
-      
-   
-    }
-/**
- * 
- * @return x position of the board
- * 
- */
-    public int getX() {return x;}
-    /**
-     * 
-     * @return y position of the board
-     */
-    public int getY() {return y;}
-    /**
-     * 
-     * @param squareID int the ID of the square
-     * @return the square object that has the ID
-     */
-    public Square getSquare(int squareID) {
-        return SQUARES[squareID - 1];
-        
+        addChutesAndLadders();
     }
 
-    private final void addLadders() {
-        getSquare(1).setLadder(new Ladder(1, 38));
-        getSquare(4).setLadder(new Ladder(4, 14));
-        getSquare(9).setLadder(new Ladder(9, 31));
-        getSquare(21).setLadder(new Ladder(21, 42));
-        getSquare(28).setLadder(new Ladder(28, 84));
-        getSquare(36).setLadder(new Ladder(36, 43));
-        getSquare(51).setLadder(new Ladder(51, 68));
-        getSquare(71).setLadder(new Ladder(71, 91));
-        getSquare(80).setLadder(new Ladder(80, 100));
-    }
-    
-    private final void addChutes() {
-        getSquare(98).setChute(new Chute(98, 78));
-        getSquare(95).setChute(new Chute(95, 75));
-        getSquare(93).setChute(new Chute(93, 73));
-        getSquare(87).setChute(new Chute(87, 24));
-        getSquare(64).setChute(new Chute(64, 60));
-        getSquare(62).setChute(new Chute(62, 19));
-        getSquare(56).setChute(new Chute(56, 53));
-        getSquare(49).setChute(new Chute(49, 11));
-        getSquare(47).setChute(new Chute(47, 26));
-        getSquare(16).setChute(new Chute(16, 6));   
+    // Accessors
+
+    /**
+     * Returns the x position of the Board
+     * @return int for x position
+     */
+    public int getX() {return x;}
+
+    /**
+     * Returns the y position of the Board
+     * @return int for y position
+     */
+    public int getY() {return y;}
+
+    /**
+     * Returns a Square object using its ID number
+     * @param squareID int for the ID number of the Square
+     * @return The Square object
+     */
+    public Square getSquare(int squareID) {
+        return SQUARES[squareID];
     }
 }

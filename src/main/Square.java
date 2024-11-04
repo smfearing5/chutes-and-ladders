@@ -1,144 +1,164 @@
 package main;
 
+import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.geom.Point2D;
+
 /**
- * 
- * @author kaitlyn
+ * This is a class for the Square object.
+ * @author Issac Blackwell
+ * @author Steven Fearing
+ * @author Jacob Plascencia
+ * @author Kaitlyn Pragnell
  */
 public class Square {
+
+    // Instance Variables
     
     private int id;
+    private int x;
+    private int y;
     private Ladder ladder;
     private Chute chute;
 
-    private int row;
-    private int col;
+    /* Public Interface */
     
-    // public Square() {
-    //     this.id = 0;
-    //     this.ladder = null;
-    //     this.chute = null;
-    // }
+    // Constructor
+
     /**
-     * constructor for the square
+     * Constructor for the Square object
      * @param id ID number
-     * @param row row that this square is in
-     * @param col the col that this square is in
+     * @param xPos x position of the Square
+     * @param yPos y position of the Square
      */
-    public Square(int id, int row, int col){
+    public Square(int id, int xPos, int yPos){
         this.id = id;
+        this.x = xPos;
+        this.y = yPos;
         this.ladder = null;
         this.chute = null;
-
-        this.row = row;
-        this.col = col;
-    }
-    
-    // Issac's getters
-    /**
-     * getter of the ID
-     * @return the ID
-     */
-    public int getId() {
-        return id;
-    }
-   
-   /**
-    * setter of the ID
-    * @param id  the ID
-    */
-    public void setId(int id) {
-        this.id = id;
-    }
-    /**
-     * getter of the ladder
-     * @return the ladder
-     */
-    public Ladder getLadder() {
-        return ladder;
-    }
-    /**
-     * getter of the chute
-     * @return the chute
-     */
-    public Chute getChute() {
-        return chute;
     }
 
-    // Steven's Getters
+    // Accessors
+
     /**
-     * getter for the row
-     * @return the row
+     * Returns the ID number of the Square
+     * @return the ID number
      */
-    public int getRow() {return row;}
+    public int getID() {return id;}
+
     /**
-     * getter for the col
-     * @return the col
+     * Returns the x position of the Square
+     * @return int for x position
      */
-    public int getCol() {return col;}
-    private int getX() {
-        return WindowSettings.BOARD_X + col * WindowSettings.SQUARE_SIZE;
-    }
-    private int getY() {
-        return WindowSettings.BOARD_Y + row * WindowSettings.SQUARE_SIZE;
-    }
+    public int getX() {return x;}
+
     /**
-     * getter for the center
-     * @return point at the center of the square
+     * Returns the y position of the Square
+     * @return int for y position
+     */
+    public int getY() {return y;}
+
+    /**
+     * Returns the point at the center of the Square
+     * @return Point2D at center of Square
      */
     public Point2D getCenter() {
-        int x = getX() + WindowSettings.SQUARE_SIZE/2;
-        int y = getY() + WindowSettings.SQUARE_SIZE/2;
+        int centerX = x + Settings.SQUARE_SIZE/2;
+        int centerY = y + Settings.SQUARE_SIZE/2;
 
-        return new Point2D.Double(x, y);
+        return new Point2D.Double(centerX, centerY);
     }
 
-    // Issac's Setters
     /**
-     * setter for the ladder
-     * @param ladder the ladder
+     * Returns the Ladder that starts from this Square
+     * Returns null if no Ladder starts from this Square
+     * @return Corresponding Ladder object
+     */
+    public Ladder getLadder() {return ladder;}
+
+    /**
+     * Returns the Chute that starts from this Square
+     * Returns null if no Chute starts from this Square
+     * @return Corresponding Chute object
+     */
+    public Chute getChute() {return chute;}
+
+    // placeholder, WIP
+    public Point2D getAnchor(Point2D otherSquareCenter) {
+        double radius = Settings.SQUARE_SIZE/4;
+        Point2D thisCenter = getCenter();
+        Vector vector = new Vector(thisCenter, otherSquareCenter);
+        vector.setMagnitude(radius);
+        
+        return vector.getPointFrom(thisCenter);
+    }
+
+    // Mutators
+
+    /**
+     * Assigns an ID number to the Square
+     * @param id  the ID number
+     */
+    public void setID(int id) {this.id = id;}
+
+    /**
+     * Sets the x position of the Square
+     * @param xPos int for x position
+     */
+    public void setX(int xPos) {x = xPos;}
+
+    /**
+     * Sets the y position of the Square
+     * @param yPos int for y position
+     */
+    public void setY(int yPos) {y = yPos;}
+
+    /**
+     * Assigns a Ladder to the Square
+     * @param ladder Ladder object starting from this Square
      */
     public void setLadder(Ladder ladder) {
         this.ladder = ladder;
     }
    
-     /**
-     * setter for the chute
-     * @param chute the chute
+    /**
+     * Assigns a Chute to the Square
+     * @param chute Chute object starting from this Square
      */
     public void setChute(Chute chute) {
         this.chute = chute;
     }
-    
-    // Steven's Setters
-    /**
-     * setter for the row
-     * @param row the row
-     */
-    public void setRow(int row) {
-        this.row = row;
-    }
-/**
- * setter for the col
- * @param col the col
- */
-    public void setCol(int col) {
-        this.col = col;
-    }
 
     // Other Methods
+
     /**
-     * drawing the square
-     * @param g2 graphics object
+     * Method used to draw the Square
+     * @param g2 Graphics object used for drawing
      */
     public void draw(Graphics2D g2) {
+        // Draw the Square
         Rectangle rectangle = new Rectangle(
-            getX(), getY(),                 // x position, y position
-            WindowSettings.SQUARE_SIZE,     // width
-            WindowSettings.SQUARE_SIZE      // height
+            x, y,                           // x position, y position
+            Settings.SQUARE_SIZE,     // width
+            Settings.SQUARE_SIZE      // height
         );
+        if (id % 2 == 0) {
+            g2.setColor(Color.YELLOW);
+            g2.fill(rectangle);
+            g2.setColor(Color.BLACK);
+        }
         g2.draw(rectangle);
+
+        // Draw the number
+        String numString = "" + id;
+        if (id < 100) numString = " " + numString;
+        if (id < 10) numString = " " + numString;
+        g2.drawString(
+            numString, 
+            x + 5, 
+            y + Settings.SQUARE_SIZE/4
+        );
     }
 }
