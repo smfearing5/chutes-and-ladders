@@ -1,5 +1,8 @@
 package main;
 
+import graphics.ControlPanel;
+import graphics.GameWindow;
+
 /**
  * This class contains everything needed for a single play session.
  * @author Issac Blackwell
@@ -145,9 +148,12 @@ public class Game {
      */
     public void PlayGame() {
         window.setVisible(true);
+        ControlPanel controlPanel = window.getControlPanel();
 
-        boolean hasWinner = false;
         int step = 0;
+        int currentPosition;
+        int newPosition;
+        boolean hasWinner = false;
         
         // Main Game loop
         while(!hasWinner) {
@@ -155,12 +161,27 @@ public class Game {
             for(Player player : players) {
                 // Player takes a turn
                 step++;
-                int currentPosition = player.getPosition();
-                int diceNum = Dice.roll();
-                int newPosition = currentPosition + diceNum;
-                System.out.print(step + ": " + player.getName() + ": " + currentPosition + "---> " + newPosition);
+
+                // Wait for Player to roll
+                while (controlPanel.isWaitingForRoll()) {
+                    try {
+                        Thread.sleep(100);
+                    }
+                    catch (InterruptedException e) {
+                        Thread.currentThread().interrupt();;
+                    }
+                }
+
+                currentPosition = player.getPosition();
+                newPosition = currentPosition + controlPanel.getRoll();;
+
+                System.out.print("Turn " + step + ": " + player.getName() + ": ");
+                System.out.print(currentPosition + "---> " + newPosition);
                 
-                if(newPosition <= 100) {
+                if(newPosition > 100) {
+                    System.out.println(", Score over 100, try again");
+                }
+                else {
                     playerWalk(player, newPosition);
 
                     if(board.getSquare(newPosition).getChute() != null) {
@@ -174,12 +195,11 @@ public class Game {
                     }
                     System.out.println();
                     hasWinner = checkForWinner(player);
-                    if (hasWinner) break;
-                }
-                else {
-                    System.out.println(", Score over 100, try again");
-                }         
+                    if (hasWinner) break;  // breaks the for loop so no Players go after the winner
+                    else controlPanel.nextTurn();
+                } 
             }
-        }
+        } // end of Game loop
+        controlPanel.endGame();
     }
 }

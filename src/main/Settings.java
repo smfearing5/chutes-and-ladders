@@ -10,9 +10,8 @@ import java.awt.Color;
  * @author Kaitlyn Pragnell
  */
 public class Settings {
-
     /**
-     * The length and width of the GameWindow
+     * The height and width of the GameWindow
      */
     public final static int WINDOW_SIZE = 1000;
 
@@ -26,7 +25,7 @@ public class Settings {
     /**
      * Board y position
      */
-    public final static int BOARD_Y = 100;
+    public final static int BOARD_Y = 75;
 
     /**
      * The side length of each Square
@@ -63,6 +62,18 @@ public class Settings {
         {51, 68}, {71, 91}, {80, 100}
     };
 
+    // Panel Constants
+
+    /**
+     * Width of the PlayerPanel
+     */
+    public final static int PLAYER_PANEL_WIDTH = 140;
+
+    /**
+     * Height of the PlayerPanel
+     */
+    public final static int PLAYER_PANEL_HEIGHT = 165;
+
     // Player constants
 
     /**
@@ -81,6 +92,19 @@ public class Settings {
     };
 
     // Other Colors
+
+    /**
+     * Background Color for Board Panel
+     */
+    public final static Color BOARD_PANEL_COLOR = new Color(185, 122, 87);
+
+    /**
+     * Colors for Squares
+     */
+    public final static Color[] SQUARE_COLORS = {
+        new Color(237, 226, 2),     // Yellow
+        new Color(224, 218, 198)    // Tan
+    };
 
     /**
      * Color of the Chutes

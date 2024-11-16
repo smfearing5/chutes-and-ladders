@@ -4,6 +4,8 @@ import java.awt.Graphics2D;
 import java.awt.geom.Line2D;
 import java.awt.geom.Point2D;
 
+import graphics.Vector;
+
 /**
  * This is a class for the Ladder object.
  * @author Issac Blackwell
