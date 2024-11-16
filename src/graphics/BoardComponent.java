@@ -1,9 +1,14 @@
 
-package main;
+package graphics;
 
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import javax.swing.JComponent;
+
+import main.Board;
+import main.Chute;
+import main.Ladder;
+import main.Player;
 
 /**
  * This is a class for the BoardComponent object.

@@ -1,6 +1,10 @@
+package graphics;
+
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import javax.swing.JComponent;
+
+import main.Dice;
 
 /**
  * An extension of the JComponent class for drawing a Dice object

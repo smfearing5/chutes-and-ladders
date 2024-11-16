@@ -1,7 +1,11 @@
-package main;
+package graphics;
 
 import java.awt.BorderLayout;
 import javax.swing.JFrame;
+
+import main.Board;
+import main.Player;
+import main.Settings;
 
 /**
  * This is a class for the GameWindow object.

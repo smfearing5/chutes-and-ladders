@@ -6,6 +6,9 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import main.Dice;
+import graphics.DiceComponent;
+
 public class DiceTester2 {
     public static void main(String[] args) {
         JFrame frame = new JFrame();
@@ -14,7 +17,7 @@ public class DiceTester2 {
         frame.setLayout(null);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        Dice dice = new Dice(75, 60);
+        Dice dice = new Dice(70, 50);
         DiceComponent diceImage = new DiceComponent(dice);
 
         JPanel dicePanel = new JPanel();

@@ -4,6 +4,7 @@ import javax.swing.JFrame;
 
 import main.Player;
 import main.Settings;
+import graphics.ControlPanel;
 
 public class PanelTester {
     public static void main(String[] args) {

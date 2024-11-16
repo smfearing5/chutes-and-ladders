@@ -1,5 +1,7 @@
 package main;
 
+import graphics.GameWindow;
+
 /**
  * This class contains everything needed for a single play session.
  * @author Issac Blackwell
@@ -148,6 +150,7 @@ public class Game {
 
         boolean hasWinner = false;
         int step = 0;
+        Dice dice = new Dice(0, 0);
         
         // Main Game loop
         while(!hasWinner) {
@@ -156,7 +159,8 @@ public class Game {
                 // Player takes a turn
                 step++;
                 int currentPosition = player.getPosition();
-                int diceNum = Dice.roll();
+                dice.roll();
+                int diceNum = dice.getSide();
                 int newPosition = currentPosition + diceNum;
                 System.out.print(step + ": " + player.getName() + ": " + currentPosition + "---> " + newPosition);
                 

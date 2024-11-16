@@ -5,6 +5,8 @@ import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.geom.Point2D;
 
+import graphics.Vector;
+
 /**
  * This is a class for the Square object.
  * @author Issac Blackwell
