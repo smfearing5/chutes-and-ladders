@@ -25,7 +25,7 @@ public class Settings {
     /**
      * Board y position
      */
-    public final static int BOARD_Y = 100;
+    public final static int BOARD_Y = 75;
 
     /**
      * The side length of each Square
@@ -92,6 +92,19 @@ public class Settings {
     };
 
     // Other Colors
+
+    /**
+     * Background Color for Board Panel
+     */
+    public final static Color BOARD_PANEL_COLOR = new Color(185, 122, 87);
+
+    /**
+     * Colors for Squares
+     */
+    public final static Color[] SQUARE_COLORS = {
+        new Color(237, 226, 2),     // Yellow
+        new Color(224, 218, 198)    // Tan
+    };
 
     /**
      * Color of the Chutes

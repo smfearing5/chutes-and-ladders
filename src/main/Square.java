@@ -146,11 +146,9 @@ public class Square {
             Settings.SQUARE_SIZE,     // width
             Settings.SQUARE_SIZE      // height
         );
-        if (id % 2 == 0) {
-            g2.setColor(Color.YELLOW);
-            g2.fill(rectangle);
-            g2.setColor(Color.BLACK);
-        }
+        g2.setColor(Settings.SQUARE_COLORS[id % 2]);
+        g2.fill(rectangle);
+        g2.setColor(Color.BLACK);
         g2.draw(rectangle);
 
         // Draw the number
