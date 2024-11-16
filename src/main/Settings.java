@@ -10,9 +10,8 @@ import java.awt.Color;
  * @author Kaitlyn Pragnell
  */
 public class Settings {
-
     /**
-     * The length and width of the GameWindow
+     * The height and width of the GameWindow
      */
     public final static int WINDOW_SIZE = 1000;
 
@@ -62,6 +61,18 @@ public class Settings {
         {21, 42}, {28, 84}, {36,  43},
         {51, 68}, {71, 91}, {80, 100}
     };
+
+    // Panel Constants
+
+    /**
+     * Width of the PlayerPanel
+     */
+    public final static int PLAYER_PANEL_WIDTH = 140;
+
+    /**
+     * Height of the PlayerPanel
+     */
+    public final static int PLAYER_PANEL_HEIGHT = 165;
 
     // Player constants
 

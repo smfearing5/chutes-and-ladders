@@ -23,6 +23,9 @@ public class Main {
         int numPlayers = in.nextInt();   
         in.nextLine();
         
+        numPlayers = InputValidation.validateInput(numPlayers);
+        
+        
         String[] players = new String[numPlayers];
         
        

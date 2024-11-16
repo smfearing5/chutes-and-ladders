@@ -1,17 +1,24 @@
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import javax.swing.JComponent;
+
 /**
- * 
- * @author kaitlyn
+ * An extension of the JComponent class for drawing a Dice object
+ * @author Issac Blackwell
+ * @author Steven Fearing
+ * @author Jacob Plascencia
+ * @author Kaitlyn Pragnell
  */
 public class DiceComponent extends JComponent {
+
     // Instance Variable
-    Dice dice;
+    
+    private Dice dice;
 
     // Constructor
+
     /**
-     * constructor of the dice component
+     * Constructor for the DiceComponent object
      * @param dice dice object
      */
     public DiceComponent(Dice dice) {
@@ -19,16 +26,14 @@ public class DiceComponent extends JComponent {
     }
 
     // Methods
+
     /**
-     * method that draws the component
-     * @param g graphics object
+     * Method used to draw the Dice object
+     * Overwrites the paintComponent method of the JComponent class
+     * @param g The default graphics object used by the JComponent class
      */
     public void paintComponent(Graphics g) {
         Graphics2D g2 = (Graphics2D) g;
         dice.draw(g2);
     }
-    /**
-     * updates the drawing when changes are made
-     */
-    public void update() {repaint();}
 }

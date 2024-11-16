@@ -14,7 +14,7 @@ public class DiceTester2 {
         frame.setLayout(null);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        Dice dice = new Dice(50, 35);
+        Dice dice = new Dice(75, 60);
         DiceComponent diceImage = new DiceComponent(dice);
 
         JPanel dicePanel = new JPanel();
@@ -28,7 +28,7 @@ public class DiceTester2 {
         class RollButtonListener implements ActionListener {
             public void actionPerformed(ActionEvent event) {
                 dice.roll();
-                diceImage.update();
+                diceImage.repaint();
                 System.out.println(dice.getSide());
             }
         }
