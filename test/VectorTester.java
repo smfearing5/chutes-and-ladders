@@ -1,6 +1,6 @@
-package main;
-
 import java.awt.geom.Point2D;
+
+import graphics.Vector;
 
 public class VectorTester {
     private static void display(Vector vector) {

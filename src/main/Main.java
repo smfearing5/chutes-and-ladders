@@ -33,6 +33,7 @@ public class Main {
             System.out.println("Player " + (i+1) + ": ");
             players[i] = in.nextLine();
         }
+        in.close();
         
         System.out.println("Players entered:");
         for (String player : players) {
@@ -41,7 +42,5 @@ public class Main {
         
         Game game = new Game(players);
         game.PlayGame();
-       
-        in.close();
     }
 }

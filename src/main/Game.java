@@ -67,7 +67,6 @@ public class Game {
 
     private void playerStep(Player player, int newPos) {
         int startPos = player.getPosition();
-        // player.moveToSquare(board.getSquare(newPos));
         player.setPosition(newPos);
         playerSpread(startPos);
         playerSpread(newPos);
@@ -172,6 +171,7 @@ public class Game {
                     }
                 }
 
+                // Move Player
                 currentPosition = player.getPosition();
                 newPosition = currentPosition + controlPanel.getRoll();;
 
