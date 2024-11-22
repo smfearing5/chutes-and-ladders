@@ -6,9 +6,14 @@ import java.awt.Rectangle;
 import java.awt.geom.Ellipse2D;
 import java.awt.geom.Point2D;
 import java.util.Random;
+
+
 /**
- * 
- * @author kaitlyn
+ * Class for the Dice object
+ * @author Issac Blackwell
+ * @author Steven Fearing
+ * @author Jacob Plascencia
+ * @author Kaitlyn Pragnell
  */
 public class Dice {
 
@@ -107,7 +112,7 @@ public class Dice {
      * rolls the dice
      */
     public void roll() {
-        side = random.nextInt(1, 7);
+        side = random.nextInt(6) + 1;
     }
 
     // Other Methods
