@@ -87,7 +87,11 @@ public class Square {
      */
     public Chute getChute() {return chute;}
 
-    // placeholder, WIP
+    /**
+     * Returns an anchor point for position chutes or ladders
+     * @param otherSquareCenter Center point of the connecting Square object
+     * @return Anchor point
+     */
     public Point2D getAnchor(Point2D otherSquareCenter) {
         double radius = Settings.SQUARE_SIZE/4;
         Point2D thisCenter = getCenter();

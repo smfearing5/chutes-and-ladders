@@ -6,7 +6,7 @@ import main.Player;
 import main.Settings;
 import graphics.ControlPanel;
 
-public class PanelTester {
+public class ControlPanelTester {
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
 
